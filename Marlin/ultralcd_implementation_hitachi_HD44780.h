@@ -481,12 +481,12 @@ unsigned lcd_print(char c) { return charset_mapper(c); }
 
     lcd.clear();
 
-    #define TEXT_SCREEN_LOGO_SHIFT ((LCD_WIDTH/2) - 4)
-    lcd.setCursor(TEXT_SCREEN_LOGO_SHIFT, 0); lcd.print('\x00'); lcd_printPGM(PSTR( "------" ));  lcd.print('\x01');
-    lcd.setCursor(TEXT_SCREEN_LOGO_SHIFT, 1);                    lcd_printPGM(PSTR("|Marlin|"));
-    lcd.setCursor(TEXT_SCREEN_LOGO_SHIFT, 2); lcd.print('\x02'); lcd_printPGM(PSTR( "------" ));  lcd.print('\x03');
+    #define TEXT_SCREEN_LOGO_SHIFT ((LCD_WIDTH/2) - 9)
+    lcd.setCursor(TEXT_SCREEN_LOGO_SHIFT, 0); lcd.print('\x00'); lcd_printPGM(PSTR( "---------------" ));  lcd.print('\x01');
+    lcd.setCursor(TEXT_SCREEN_LOGO_SHIFT, 1);                    lcd_printPGM(PSTR("|Policia Federal|"));
+    lcd.setCursor(TEXT_SCREEN_LOGO_SHIFT, 2); lcd.print('\x02'); lcd_printPGM(PSTR( "---------------" ));  lcd.print('\x03');
 
-    lcd_scroll(0, 3, PSTR("marlinfirmware.org"), LCD_WIDTH, 3000);
+    lcd_scroll(0, 3, PSTR("Proteger y Servir a la Comunidad"), LCD_WIDTH, 3000);
 
     #ifdef STRING_SPLASH_LINE1
       lcd_erase_line(3);
