@@ -118,8 +118,13 @@ void manage_inactivity(bool ignore_stepper_queue = false);
   #define  enable_x() do { X_ENABLE_WRITE( X_ENABLE_ON); X2_ENABLE_WRITE( X_ENABLE_ON); } while (0)
   #define disable_x() do { X_ENABLE_WRITE(!X_ENABLE_ON); X2_ENABLE_WRITE(!X_ENABLE_ON); axis_known_position[X_AXIS] = false; } while (0)
 #elif HAS_X_ENABLE
-  #define  enable_x() X_ENABLE_WRITE( X_ENABLE_ON)
-  #define disable_x() { X_ENABLE_WRITE(!X_ENABLE_ON); axis_known_position[X_AXIS] = false; }
+  #if ENABLED(X_DUAL_STEPPER_DRIVERS)
+    #define  enable_x() { X_ENABLE_WRITE( X_ENABLE_ON); X2_ENABLE_WRITE(X_ENABLE_ON); }
+    #define disable_x() { X_ENABLE_WRITE(!X_ENABLE_ON); X2_ENABLE_WRITE(!X_ENABLE_ON); axis_known_position[X_AXIS] = false; }
+  #else
+    #define  enable_x() X_ENABLE_WRITE( X_ENABLE_ON)
+    #define disable_x() { X_ENABLE_WRITE(!X_ENABLE_ON); axis_known_position[X_AXIS] = false; }
+  #endif
 #else
   #define enable_x() ;
   #define disable_x() ;

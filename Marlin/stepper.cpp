@@ -119,8 +119,13 @@ volatile signed char count_direction[NUM_AXIS] = { 1, 1, 1, 1 };
       if (current_block->active_extruder != 0) X2_STEP_WRITE(v); else X_STEP_WRITE(v); \
     }
 #else
-  #define X_APPLY_DIR(v,Q) X_DIR_WRITE(v)
-  #define X_APPLY_STEP(v,Q) X_STEP_WRITE(v)
+  #if ENABLED(X_DUAL_STEPPER_DRIVERS)
+    #define X_APPLY_DIR(v,Q) { X_DIR_WRITE(v); X2_DIR_WRITE((v) != INVERT_X2_VS_X_DIR); }
+    #define X_APPLY_STEP(v,Q) { X_STEP_WRITE(v); X2_STEP_WRITE(v); }
+  #else
+    #define X_APPLY_DIR(v,Q) X_DIR_WRITE(v)
+    #define X_APPLY_STEP(v,Q) X_STEP_WRITE(v)
+  #endif
 #endif
 
 #if ENABLED(Y_DUAL_STEPPER_DRIVERS)

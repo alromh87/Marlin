@@ -156,11 +156,17 @@
 #endif // Z_DUAL_STEPPER_DRIVERS
 
 // Same again but for Y Axis.
-//#define Y_DUAL_STEPPER_DRIVERS
-
+#define Y_DUAL_STEPPER_DRIVERS
 #if ENABLED(Y_DUAL_STEPPER_DRIVERS)
   // Define if the two Y drives need to rotate in opposite directions
   #define INVERT_Y2_VS_Y_DIR true
+#endif
+
+// Same again but for Y Axis. Using E0 Pins, NO EXTRUDER!!!!
+#define X_DUAL_STEPPER_DRIVERS
+#if ENABLED(X_DUAL_STEPPER_DRIVERS)
+  // Define if the two X drives need to rotate in opposite directions
+  #define INVERT_X2_VS_X_DIR true
 #endif
 
 // Enable this for dual x-carriage printers.
